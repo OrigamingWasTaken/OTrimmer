@@ -352,10 +352,10 @@ def main():
     qml_file = None
     potential_paths = [
         # Check in the same directory as the script
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), "trimmer.qml"),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "otrimmer.qml"),
         # Check in standard KDE application data paths
-        "/usr/share/trimmer/trimmer.qml",
-        os.path.expanduser("~/.local/share/trimmer/trimmer.qml")
+        "/usr/share/trimmer/otrimmer.qml",
+        os.path.expanduser("~/.local/share/trimmer/otrimmer.qml")
     ]
     
     for path in potential_paths:
@@ -364,7 +364,7 @@ def main():
             break
     
     if not qml_file:
-        print("Error: Could not find trimmer.qml")
+        print("Error: Could not find otrimmer.qml")
         sys.exit(1)
     
     # Pass the video path to QML
