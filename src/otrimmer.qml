@@ -16,6 +16,7 @@ Kirigami.ApplicationWindow {
     // Video trimming state
     property bool trimComplete: false
     property bool isDarkTheme: Kirigami.Theme.colorSet === Kirigami.Theme.Dark
+    property bool compressionBusy: false
     
     // Video trimmer backend
     VideoTrimmer {
@@ -33,6 +34,14 @@ Kirigami.ApplicationWindow {
             errorNotification.visible = true
             hideTimer.restart()
         }
+        
+        onCompressionStarted: {
+            compressionBusy = true
+        }
+        
+        onCompressionFinished: {
+            compressionBusy = false
+        }
     }
     
     // Timer to hide notifications
@@ -42,6 +51,54 @@ Kirigami.ApplicationWindow {
         onTriggered: {
             successNotification.visible = false
             errorNotification.visible = false
+        }
+    }
+    
+    // Custom compression dialog
+    Controls.Dialog {
+        id: compressDialog
+        title: "Compress Video"
+        standardButtons: Controls.Dialog.Ok | Controls.Dialog.Cancel
+        modal: true
+        
+        ColumnLayout {
+            width: parent.width
+            spacing: Kirigami.Units.largeSpacing
+            
+            Controls.Label {
+                text: "Enter target size in MB:"
+                Layout.fillWidth: true
+            }
+            
+            Controls.SpinBox {
+                id: sizeInput
+                from: 1
+                to: 1000
+                value: 10
+                
+                textFromValue: function(value) {
+                    return value + " MB"
+                }
+                
+                valueFromText: function(text) {
+                    return parseInt(text) || 0
+                }
+                
+                Layout.fillWidth: true
+            }
+            
+            Controls.Label {
+                text: "Note: Smaller sizes may reduce video quality."
+                font.italic: true
+                opacity: 0.7
+                Layout.fillWidth: true
+                wrapMode: Text.Wrap
+            }
+        }
+        
+        onAccepted: {
+            compressionBusy = true
+            trimmer.compressToSize(sizeInput.value)
         }
     }
     
@@ -431,9 +488,19 @@ Kirigami.ApplicationWindow {
                     }
                     
                     Controls.Button {
+                        text: "Custom Compress"
+                        icon.name: "insert-object"
+                        enabled: root.trimComplete && !compressionBusy
+                        
+                        onClicked: {
+                            compressDialog.open()
+                        }
+                    }
+                    
+                    Controls.Button {
                         text: "Copy to Clipboard"
                         icon.name: "edit-copy"
-                        enabled: root.trimComplete
+                        enabled: root.trimComplete && !compressionBusy
                         
                         onClicked: {
                             trimmer.copyTrimToClipboard()
@@ -443,7 +510,7 @@ Kirigami.ApplicationWindow {
                     Controls.Button {
                         text: "Save"
                         icon.name: "document-save"
-                        enabled: root.trimComplete
+                        enabled: root.trimComplete && !compressionBusy
                         
                         onClicked: {
                             trimmer.saveTrimmingDialog()

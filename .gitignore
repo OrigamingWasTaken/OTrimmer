@@ -1,0 +1,6 @@
+venv
+otrimmer.build
+otrimmer.dist
+otrimmer.onefile-build
+otrimmer.build
+otrimmer.bin

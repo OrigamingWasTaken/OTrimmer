@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=OTrimmer
+Comment=KDE Wayland video trimmer
+Exec=otrimmer-launcher
+Icon=otrimmer
+Categories=AudioVideo;Video;AudioVideoEditing;Qt;KDE;
+MimeType=video/mp4;video/mpeg;video/quicktime;video/webm;video/x-flv;video/x-matroska;video/x-ms-wmv;video/x-msvideo;
+Terminal=false

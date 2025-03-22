@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3daee9"/>
+      <stop offset="100%" stop-color="#2980b9"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="20" fill="url(#gradient)" stroke="#2980b9" stroke-width="1"/>
+  
+  <!-- Record symbol -->
+  <circle cx="24" cy="24" r="8" fill="#ecf0f1"/>
+  
+  <!-- Recording "wave" rings -->
+  <circle cx="24" cy="24" r="12" fill="none" stroke="#ecf0f1" stroke-width="1.5" stroke-opacity="0.7"/>
+  <circle cx="24" cy="24" r="16" fill="none" stroke="#ecf0f1" stroke-width="1" stroke-opacity="0.4"/>
+  
+  <!-- GPU indicator (small squares at the edge) -->
+  <rect x="10" y="10" width="3" height="3" fill="#ecf0f1" rx="0.5"/>
+  <rect x="35" y="10" width="3" height="3" fill="#ecf0f1" rx="0.5"/>
+  <rect x="10" y="35" width="3" height="3" fill="#ecf0f1" rx="0.5"/>
+  <rect x="35" y="35" width="3" height="3" fill="#ecf0f1" rx="0.5"/>
+</svg>
