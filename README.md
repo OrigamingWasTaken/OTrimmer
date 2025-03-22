@@ -1,4 +1,5 @@
-# OTrimmer
+# OTrimmer
+
 > KDE Wayland video trimmer
 
 ## Build
